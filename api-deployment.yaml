@@ -15,8 +15,8 @@ spec:
         app: synergychat-api
     spec:
       containers:
-      - name: synergychat-api
-        image: bootdotdev/synergychat-api:latest
-        envFrom:
-        - configMapRef:
-            name: synergychat-api-configmap
+        - name: synergychat-api
+          image: bootdotdev/synergychat-api:latest
+          envFrom:
+            - configMapRef:
+                name: synergychat-api-configmap
