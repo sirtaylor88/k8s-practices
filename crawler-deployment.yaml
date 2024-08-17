@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: synergychat-crawler
+  namespace: crawler
   labels:
     app: synergychat-crawler
 spec:
