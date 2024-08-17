@@ -15,8 +15,56 @@ spec:
         app: synergychat-crawler
     spec:
       containers:
-      - name: synergychat-crawler
+      - name: synergychat-crawler-1
         image: bootdotdev/synergychat-crawler:latest
         envFrom:
         - configMapRef:
             name: synergychat-crawler-configmap
+        volumeMounts:
+        - name: cache-volume
+          mountPath: /cache
+      - name: synergychat-crawler-2
+        image: bootdotdev/synergychat-crawler:latest
+        env:
+        - name: CRAWLER_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: synergychat-crawler-configmap
+              key: CRAWLER_PORT_2
+        - name: CRAWLER_KEYWORDS
+          valueFrom:
+            configMapKeyRef:
+              name: synergychat-crawler-configmap
+              key: CRAWLER_KEYWORDS
+        - name: CRAWLER_DB_PATH
+          valueFrom:
+            configMapKeyRef:
+              name: synergychat-crawler-configmap
+              key: CRAWLER_DB_PATH
+        volumeMounts:
+        - name: cache-volume
+          mountPath: /cache
+      - name: synergychat-crawler-3
+        image: bootdotdev/synergychat-crawler:latest
+        env:
+        - name: CRAWLER_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: synergychat-crawler-configmap
+              key: CRAWLER_PORT_3
+        - name: CRAWLER_KEYWORDS
+          valueFrom:
+            configMapKeyRef:
+              name: synergychat-crawler-configmap
+              key: CRAWLER_KEYWORDS
+        - name: CRAWLER_DB_PATH
+          valueFrom:
+            configMapKeyRef:
+              name: synergychat-crawler-configmap
+              key: CRAWLER_DB_PATH
+        volumeMounts:
+        - name: cache-volume
+          mountPath: /cache
+      volumes:
+      - name: cache-volume
+        emptyDir: {}
